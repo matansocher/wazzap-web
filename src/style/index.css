@@ -1,0 +1,46 @@
+.top-container {
+  display: flex;
+  margin:0; 
+  padding:0; 
+  height:100vh; 
+  overflow:hidden;
+}
+.side-menu {
+  width: 30%;
+}
+.main {
+  width: 70%;
+  background-color: red;
+}
+
+/* side menu */
+.side-menu-header {
+  height: 200px;
+  background-color: brown;
+  position: relative;
+  top: 0;
+  width: 100%;
+}
+.side-menu-contacts {
+  top: 200px;
+  width: 100%;
+  background-color: aqua;
+  overflow: auto;
+  max-height: 100vh;
+}
+
+/* main */
+.main-header {
+  height: 50px;
+  background-color: white;
+}
+.main-content {
+  top: 50px;
+  bottom: 50px;
+  background-color: black;
+}
+.main-bottom {
+  height: 50px;
+  bottom: 0;
+  background-color: white;
+}
