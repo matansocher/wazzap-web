@@ -1,0 +1,14 @@
+.contact-container {
+  display: flex;
+  height: 70px;
+  width: 100%;
+}
+.contact-avatar {
+  padding: 10px;
+}
+.contact-details {
+  
+}
+.contact-actions {
+  
+}

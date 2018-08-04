@@ -1,0 +1,50 @@
+.main-header-container {
+  display: flex;
+}
+.main-header-avatar {
+  padding: 10px;
+  cursor: pointer;
+}
+.main-header-info {
+  padding: 10px;
+  width: 30%;
+  cursor: pointer;
+}
+.main-header-info-icons {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 15px;
+}
+.main-header-info-icon {
+  width: 25; 
+  height: 25;
+}
+
+
+
+.main-bottom-container {
+  display: flex;
+  width: 70%;
+}
+.main-bottom-smiley-div {
+  width: 5%;
+  left: 0;
+  padding: 15px;
+}
+.main-bottom-input-div {
+  width: 90%;
+  right: 5%;
+  left: 5%;
+}
+.main-bottom-input {
+  width: 95%;
+  /* padding: 15px; */
+  /* padding: 20px; */
+  border-radius: 10px;
+}
+.main-bottom-send-div {
+  width: 5%;
+  right: 0;
+  padding: 15px;
+}

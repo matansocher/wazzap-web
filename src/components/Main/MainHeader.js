@@ -1,13 +1,45 @@
-import React, { Component } from 'react'
+import React from 'react'
+// import _ from 'lodash';
 
-class MainHeader extends Component {
-  render() {
-    return (
-      <div className="main-header">
-        MainHeaderrrr
-      </div>
-    )
+import MenuIcon from 'material-ui/svg-icons/navigation/more-vert';
+
+import { getLastSeenString } from '../../actions/common_functions';
+
+import Avatar from '../common/Avatar';
+
+
+// class MainHeader extends Component {
+const MainHeader = ({ currentChatUser, deleteContactChat }) => {
+
+  deleteContactChat = () => {
+    deleteContactChat(currentChatUser);
   }
+
+  // if (_.isEmpty(currentChatUser)) {
+  //   return <span />;
+  // }
+
+  // const { name, avatar, lastSeen, isTyping } = currentChatUser.info;
+
+  return (
+    <div className="main-header-container">
+
+      <div className="main-header-avatar">
+        <Avatar avatar={'contact1.png'} />
+      </div>
+
+      <div className="main-header-info">
+        <div>Tuti</div>
+        <div>{getLastSeenString(false, "Online")}</div>
+        {/* <div>{getLastSeenString(isTyping, lastSeen)}</div> */}
+      </div>
+
+      <div className="main-header-info-icons">
+        <MenuIcon className="main-header-info-icon" />
+      </div>
+
+    </div>
+  )
 }
 
 export default MainHeader;

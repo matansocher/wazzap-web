@@ -1,27 +1,12 @@
 import React from 'react';
 import fire from '../firebase';
 import _ from 'lodash';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import CircularProgress from 'material-ui/CircularProgress';
-import Badge from 'material-ui/Badge';
-import Divider from 'material-ui/Divider';
+import moment from 'moment';
 
 export function raedMessage(useruid, contactid) {
   const updates = {};
   updates[`friendships/${useruid}/${contactid}/isUnraed`] = "None";
   fire.database().ref().update(updates);
-}
-
-export function getUnraedBadge(isUnread) {
-  // possible - 0(marked as unraed), some number, "None" - all raed
-  if (isUnread === "None") {
-    return <span />;
-  }
-  return (
-    <span className="pull-right unraed-badge">
-      <Badge badgeContent={isUnread === 0 ? "" : isUnread} primary={true} />
-    </span>
-  );
 }
 
 export function updateStatusInConversation(useruid, contactid, isTyping) { // updates to "Online", "Last seen 01.01.2010" or "Typing"
@@ -68,12 +53,8 @@ export function getLastSeenString(isTyping, lastSeen) {
   return `Last seen at ${getCorrectDate(dateString)} ${getCorrectHour(hourString)}`;
 }
 
-
 export function getDateHourString() { // for last seen
-  const date = new Date();
-  const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  const hourString = `${date.getHours()}:${date.getMinutes()}`;
-  return `${dateString} ${hourString}`
+  return moment().format('YYYY-MM-DD HH:mm');
 }
 
 export function sortByUid(array) {
@@ -125,33 +106,10 @@ export function getCorrectHour(time) {
   return `${hour}:${minute}`
 }
 
-export function getCircularProgress() {
-  return (
-    <MuiThemeProvider>
-      <div className="center">
-        <CircularProgress size={80} thickness={5} />
-      </div>
-    </MuiThemeProvider>
-  );
-}
-
-export function getChatBubbleDate(nextMessage) {
-  let lastTime = getLastMessageTime(nextMessage);
-  lastTime = lastTime.includes(":") ? "Toady" : lastTime;
-  return (
-    <div key={nextMessage.date}>
-      <div className="day-indicator">
-        {lastTime}
-      </div>
-      <Divider />
-    </div>
-  )
-}
-
 export function filterBySearch(array, subString) {
   return _.filter(array, contact => {
-    const name = contact.info ? contact.info.name : contact.name;
-    return name.toLowerCase().startsWith(subString.toLowerCase());
+    // const name = contact.info ? contact.info.name : contact.name;
+    return contact.info.name.toLowerCase().startsWith(subString.toLowerCase());
   });
 }
 

@@ -1,84 +1,94 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/index';
+import _ from 'lodash';
+import { sortContactsByLastMessageTime, filterBySearch, splitToPinned, getDateHourString, updateLastSeen } from '../../actions/common_functions';
+
+import Contact from './Contact';
+import LoadingIndicator from '../common/LoadingIndicator';
+
+import FlatButton from 'material-ui/FlatButton';
+import { List } from 'material-ui/List';
+import Divider from 'material-ui/Divider';
 
 class SideMenuContacts extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchTerm: '',
+      gesture: false,
+      gestureText: "",
+      loading: false
+    }
+  }
+
+  componentDidMount() {
+    // this.fetchData(user.uid);
+    this.fetchData('6NXDlDWAikUjblf1TuoPPn9dQ6X2');
+  }
+
+  fetchData = (uid) => {
+    this.setState({ loading: true }, () => {
+      const lastSeen = "Online";
+      this.props.actionFetchFriendsList(uid, () => {
+        this.props.actionFetchUserData(uid, () => {
+          // console.log("2")
+          updateLastSeen(uid, lastSeen, () => {
+            this.setState({ loading: false });
+          })
+        });
+      });
+    });
+  }
+
+  renderContacts() {
+    if (_.isEmpty(this.props.contactList) && !this.state.loading) {
+      if (!this.state.loading) {
+        return (
+          <div className="center">
+            <h3>You have no conversations yet</h3>
+            <FlatButton label="Find Friends" primary={true} />
+          </div>
+        );
+      } else
+        return (<span />);
+    }
+    let contacts = _.values(this.props.contactList);
+    if (this.state.searchTerm !== '' && contacts && !_.isEmpty(contacts))
+      contacts = filterBySearch(contacts, this.state.searchTerm);
+    contacts = sortContactsByLastMessageTime(contacts);
+    contacts = splitToPinned(contacts);
+    return (
+      contacts.map(contact => 
+        <Contact key={contact.info.email}
+          contact={contact}
+          lastMessage={contact.lastMessage}
+          fetchChatData={this.fetchChatData}
+          deleteContactChat={this.deleteContactChat}
+          pinUnpinChat={this.pinUnpinChat}
+          markAsUnraed={this.markAsUnraed} />
+      )
+    );
+  }
+
   render() {
     return (
       <div className="side-menu-contacts">
-      11111111111111111111111111
-      laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
-        laksdjnvlskdfjvnsdfkljvn
+        {this.state.loading ? <LoadingIndicator /> : <span />}
+        <List>
+          {this.renderContacts()}
+        </List>
       </div>
     )
   }
 }
 
-export default SideMenuContacts;
+function mapStateToProps(state) {
+  return {
+    contactList: state.contactList,
+    user: state.user
+  };
+}
+
+export default connect(mapStateToProps, actions)(SideMenuContacts);

@@ -1,0 +1,39 @@
+.side-menu-info-container {
+  height: 60px;
+  background-color: aliceblue;
+  display: flex;
+}
+.side-menu-info-avatar {
+  padding: 5px;
+}
+.side-menu-info-details {
+  padding: 5px;
+  margin-top: 10px;
+}
+.side-menu-info-icons {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 15px;
+}
+.side-menu-info-icon {
+  width: 25; 
+  height: 25;
+}
+.side-menu-search-container {
+  height: 50px;
+  background-color: blueviolet;
+  padding: 10px;
+  display: flex;
+}
+.side-menu-search {
+  width: 90%;
+  margin-left: 5px;
+  /* height: 100%; */
+  border-radius: 10px;
+}
+.side-menu-search-icon {
+  width: 25; 
+  height: 25;
+  margin-top: 4px;
+}
