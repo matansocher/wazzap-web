@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
+import _ from 'lodash';
 
 class MainContent extends Component {
   render() {
+    if (_.isEmpty(this.props.currentChatUser)) {
+      return (
+        <div>Pick a Chat</div>
+      )
+    }
     return (
       <div>
         MainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContentMainContent

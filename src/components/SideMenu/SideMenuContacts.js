@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 import _ from 'lodash';
-import { sortContactsByLastMessageTime, filterBySearch, splitToPinned, getDateHourString, updateLastSeen } from '../../actions/common_functions';
+import { sortContactsByLastMessageTime, filterBySearch, splitToPinned } from '../../actions/common_functions';
 
 import Contact from './Contact';
 import LoadingIndicator from '../common/LoadingIndicator';
 
 import FlatButton from 'material-ui/FlatButton';
 import { List } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
 
 class SideMenuContacts extends Component {
 
@@ -24,22 +23,30 @@ class SideMenuContacts extends Component {
   }
 
   componentDidMount() {
-    // this.fetchData(user.uid);
-    this.fetchData('6NXDlDWAikUjblf1TuoPPn9dQ6X2');
+    
   }
 
-  fetchData = (uid) => {
+  // fetchData = (uid) => {
+  //   this.setState({ loading: true }, () => {
+  //     const lastSeen = "Online";
+  //     this.props.actionFetchFriendsList(uid, () => {
+  //       this.props.actionFetchUserData(uid, () => {
+  //         // console.log("2")
+  //         updateLastSeen(uid, lastSeen, () => {
+  //           this.setState({ loading: false });
+  //         })
+  //       });
+  //     });
+  //   });
+  // }
+
+  fetchChatData = (contact) => {
     this.setState({ loading: true }, () => {
-      const lastSeen = "Online";
-      this.props.actionFetchFriendsList(uid, () => {
-        this.props.actionFetchUserData(uid, () => {
-          // console.log("2")
-          updateLastSeen(uid, lastSeen, () => {
-            this.setState({ loading: false });
-          })
-        });
+      const useruid = this.props.user.uid;
+      this.props.actionFetchChatData(useruid, contact, () => {
+        this.setState({ loading: false })
       });
-    });
+    })
   }
 
   renderContacts() {

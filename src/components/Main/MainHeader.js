@@ -1,5 +1,5 @@
 import React from 'react'
-// import _ from 'lodash';
+import _ from 'lodash';
 
 import MenuIcon from 'material-ui/svg-icons/navigation/more-vert';
 
@@ -15,9 +15,11 @@ const MainHeader = ({ currentChatUser, deleteContactChat }) => {
     deleteContactChat(currentChatUser);
   }
 
-  // if (_.isEmpty(currentChatUser)) {
-  //   return <span />;
-  // }
+  if (_.isEmpty(currentChatUser)) {
+    return (
+      <div>Pick a Chat</div>
+    )
+  }
 
   // const { name, avatar, lastSeen, isTyping } = currentChatUser.info;
 

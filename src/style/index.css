@@ -57,7 +57,12 @@ body {
 }
 
 
-
+.loading-indicator {
+  position: absolute;
+  text-align: center;
+  margin: 0 auto;
+  z-index: 9;
+}
 .center {
   text-align: center;
 }

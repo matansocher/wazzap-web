@@ -5,12 +5,18 @@ import UnraedBadge from '../common/UnraedBadge';
 
 import { getLastMessageTime, getLastMessage } from '../../actions/common_functions';
 
+import { Divider } from 'material-ui';
 import MenuIcon from 'material-ui/svg-icons/navigation/more-vert';
 import PinIcon from 'material-ui/svg-icons/toggle/star-border';
 
 import '../../style/contact.css';
 
 class Contact extends Component {
+
+  fetchChatData = () => {
+    this.props.fetchChatData(this.props.contact);
+  }
+
   render() {
     const { name, avatar } = this.props.contact.info;
     const { pinned, isUnraed, isTyping } = this.props.contact;
@@ -19,7 +25,7 @@ class Contact extends Component {
     const lmContent = getLastMessage(isTyping, lastMessage || false, name);
 
     return (
-      <div className="contact-container">
+      <div className="contact-container" onClick={this.fetchChatData}>
 
         <div className="contact-avatar">
           <Avatar avatar={avatar} />
@@ -36,7 +42,7 @@ class Contact extends Component {
           {lastMessageTime}
           {pinned ? <PinIcon className="pin-icon" /> : <span />}
         </div>
-
+        <Divider />
       </div>
     )
   }

@@ -11,11 +11,11 @@ class Main extends Component {
       <React.Fragment>
 
         <div className="main-header">
-          <MainHeader currentChatUser={{ a: 4 }} deleteContactChat={() => { }} />
+          <MainHeader currentChatUser={{  }} deleteContactChat={() => { }} />
         </div>
 
         <div className="main-content">
-          <MainContent />
+          <MainContent currentChatUser={{  }} />
         </div>
 
         <div className="main-bottom">

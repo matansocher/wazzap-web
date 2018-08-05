@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 
 import SmileyIcon from 'material-ui/svg-icons/social/mood';
 import SendIcon from 'material-ui/svg-icons/content/send';
 
 class MainBottom extends Component {
   render() {
+    if (_.isEmpty(this.props.currentChatUser)) {
+      return (
+        <span />
+      )
+    }
     return (
         <div className="main-bottom-container">
 

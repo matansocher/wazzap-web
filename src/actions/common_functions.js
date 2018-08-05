@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import fire from '../firebase';
 import _ from 'lodash';
 import moment from 'moment';
@@ -16,7 +16,6 @@ export function updateStatusInConversation(useruid, contactid, isTyping) { // up
 }
 
 export function updateLastSeen(useruid, lastSeen, callback) { // updates to "Online", "Last seen 01.01.2010" or "Typing"
-  console.log(useruid)
   const updates = {};
   updates[`users/${useruid}/lastSeen`] = lastSeen;
   fire.database().ref().update(updates).then(() => {
