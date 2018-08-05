@@ -21,19 +21,19 @@ const MainHeader = ({ currentChatUser, deleteContactChat }) => {
     )
   }
 
-  // const { name, avatar, lastSeen, isTyping } = currentChatUser.info;
+  const { name, avatar, lastSeen, isTyping } = currentChatUser.info;
 
   return (
     <div className="main-header-container">
 
       <div className="main-header-avatar">
-        <Avatar avatar={'contact1.png'} />
+        <Avatar avatar={avatar} />
       </div>
 
       <div className="main-header-info">
-        <div>Tuti</div>
-        <div>{getLastSeenString(false, "Online")}</div>
-        {/* <div>{getLastSeenString(isTyping, lastSeen)}</div> */}
+        <div>{name}</div>
+        {/* <div>{getLastSeenString(false, "Online")}</div> */}
+        <div>{getLastSeenString(isTyping, lastSeen)}</div>
       </div>
 
       <div className="main-header-info-icons">

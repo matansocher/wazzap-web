@@ -97,6 +97,7 @@ export function getCorrectDate(time) {
 }
 
 export function getCorrectHour(time) {
+  console.log(time)
   const hourArray = time.split(':');
   let hour = hourArray[0];
   let minute = hourArray[1];
@@ -160,52 +161,52 @@ export function getLastMessageTime(lastMessage) {
 }
 
 function checkIfToday(today, dateObject) {
-  if (today.getFullYear() === dateObject.getFullYear() &&
-    today.getMonth() === dateObject.getMonth() &&
-    today.getDate() === dateObject.getDate())
-    return true;
-  return false;
+  return moment(today).diff(moment(dateObject), 'days') === 0;
+  // if (today.getFullYear() === dateObject.getFullYear() &&
+  //   today.getMonth() === dateObject.getMonth() &&
+  //   today.getDate() === dateObject.getDate())
+  //   return true;
+  // return false;
 }
 
 function checkIfYesterday(today, dateObject) {
-  if (today.getFullYear() === dateObject.getFullYear() &&
-    today.getMonth() === dateObject.getMonth() &&
-    today.getDate() !== 1 &&
-    (today.getDate() - 1) === dateObject.getDate())  // not first day of month
-    return true;
+  return moment(today).diff(moment(dateObject), 'days') === 1;
+  // console.log(today, dateObject)
 
-  if (today.getFullYear() === dateObject.getFullYear() &&
-    today.getDate() === 1 &&
-    today.getMonth() - 1 === dateObject.getMonth() &&
-    getLastDayOfPrevMonth(today.getMonth()) === dateObject.getDate()) // first day of month
-    return true;
+  // var a = moment(today);
+  // var b = moment(dateObject);
+  // console.log(a, b)
+  // console.log(a.diff(b, 'days'))
+  
 
-  if (today.getDate() === 1 &&
-    today.getMonth() === 0 &&
-    dateObject.getDate() === 31 &&
-    dateObject.getMonth() === 11 &&
-    (today.getFullYear() - 1) === dateObject.getFullYear()) // first day of year
-    return true;
+  // if (today.getFullYear() === dateObject.getFullYear() &&
+  //   today.getMonth() === dateObject.getMonth() &&
+  //   today.getDate() !== 1 &&
+  //   (today.getDate() - 1) === dateObject.getDate())  // not first day of month
+  //   return true;
 
-  return false; // nothing from above
+  // if (today.getFullYear() === dateObject.getFullYear() &&
+  //   today.getDate() === 1 &&
+  //   today.getMonth() - 1 === dateObject.getMonth() &&
+  //   getLastDayOfPrevMonth(today.getMonth()) === dateObject.getDate()) // first day of month
+  //   return true;
+
+  // if (today.getDate() === 1 &&
+  //   today.getMonth() === 0 &&
+  //   dateObject.getDate() === 31 &&
+  //   dateObject.getMonth() === 11 &&
+  //   (today.getFullYear() - 1) === dateObject.getFullYear()) // first day of year
+  //   return true;
+
+  // return false; // nothing from above
 }
 
 function checkIfLastWeek(today, dateObject) {
-  const dayInSeconds = 60 * 60 * 24;
-  if (((today.getTime() / 1000) - (dateObject.getTime() / 1000)) < 7 * dayInSeconds) // not today or yesterday, but in this week
-    return true;
-  return false;
-}
-
-export function compareDates(date1, date2) {
-  const split1 = date1.split('-');
-  const split2 = date2.split('-');
-  if (split1[0] === split2[0] &&
-    split1[1] === split2[1] &&
-    split1[2] === split2[2]) { // not on the same day
-    return true;
-  }
-  return false;
+  return moment(today).diff(moment(dateObject), 'days') < 7;
+  // const dayInSeconds = 60 * 60 * 24;
+  // if (((today.getTime() / 1000) - (dateObject.getTime() / 1000)) < 7 * dayInSeconds) // not today or yesterday, but in this week
+  //   return true;
+  // return false;
 }
 
 function getDayFromDayNumber(dayNumber) {
@@ -214,15 +215,15 @@ function getDayFromDayNumber(dayNumber) {
   return daysArray[dayNumber];
 }
 
-function getLastDayOfPrevMonth(month) {
-  if (month === 1) return 28;
-  else if (month === 3 || month === 5 || month === 8 || month === 10) return 30;
-  else return 31;
-}
+// function getLastDayOfPrevMonth(month) {
+//   if (month === 1) return 28;
+//   else if (month === 3 || month === 5 || month === 8 || month === 10) return 30;
+//   else return 31;
+// }
 
 export function getLastMessage(isTyping, { content }, name) {
   if (isTyping) {
-    return "Typing..."; // "Typing"
+    return "Typing...";
   }
   if (content) {
     const textWidth = (window.innerWidth - 100) / 9;
